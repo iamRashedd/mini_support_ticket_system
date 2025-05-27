@@ -21,5 +21,21 @@ return [
         '/auth/register' => [
             'action' => 'controllers/api/auth/register.php'
         ],
+        '/department' => [
+            'action' => 'controllers/api/department/create.php',
+            'middleware' => 'auth'
+        ],
+    ],
+    'PUT' => [
+        '/department/{id}' =>[
+            'action' => 'controllers/api/department/update.php',
+            'middleware' => 'auth'
+        ],
+    ],
+    'DELETE' => [
+        '/department/{id}' =>[
+            'action' => 'controllers/api/department/delete.php',
+            'middleware' => 'auth'
+        ],
     ],
 ];

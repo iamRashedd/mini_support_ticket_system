@@ -90,6 +90,18 @@ class Query{
         }
         return $status;
     }
+    
+    public function update($id,$data){
+        $sql = "UPDATE {$this->table} SET ".implode('=?,',array_keys($data))."=? WHERE id=".$id;
+
+        // return $sql;
+        $stmt = $this->pdo->prepare($sql);
+        $status = $stmt->execute(array_values($data));
+        if($status){
+            return $this->find($id);
+        }
+        return $status;
+    } 
     public function delete(){
         $sql = "DELETE FROM {$this->table}";
         if (!empty($this->wheres)) {

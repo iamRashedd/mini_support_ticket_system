@@ -5,6 +5,7 @@ class User{
     public $name;
     public $email;
     private $password;
+    public $role;
     public $created_at;
 
     // public $cols = ['id','name','email','password','role'];
@@ -24,5 +25,8 @@ class User{
                 'expires_at' => date("Y-m-d H:i",(time()+TOKEN_EXP)),
             ]);
         return $token ? $token->token : $token;
+    }
+    public function isAdmin(){
+        return $this->role == 'admin';
     }
 }

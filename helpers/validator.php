@@ -30,6 +30,24 @@ class Validator{
         self::pass('name');
         return false;
     }
+    public static function dep_name($name){
+        if(!$name){
+            static::$validation_error['name'] = 'Name Required';
+            return true;
+        }
+        if(!preg_match('/^[a-zA-Z]+$/', $name)){
+            static::$validation_error['name'] = 'Invalid Name';
+            return true;
+        }
+        $query = new Query();
+        $old_user = $query->table('departments')->where('name','=',$name)->first();
+        if($old_user){
+            static::$validation_error['name'] = 'Name already taken';
+            return true;
+        }
+        self::pass('name');
+        return false;
+    }
 
     public static function email($email){
         if(!$email){
@@ -99,7 +117,7 @@ class Validator{
             static::$validation_error['role'] = 'Role Required';
             return true;
         }
-        if(!in_array($value,['admin','agent'])){
+        if(!in_array($value,['admin','agent','user'])){
             static::$validation_error['role'] = 'Invalid Role';
             return true;
         }

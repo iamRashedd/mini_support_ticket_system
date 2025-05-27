@@ -6,5 +6,5 @@ require_once('helpers/initialize.php');
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = $_SERVER['REQUEST_METHOD'];
-$data = '';
+$segments = explode('/', $uri);
 require_once ('routes/router.php');

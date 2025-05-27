@@ -19,6 +19,7 @@
         $data = [
             'users' => 'User',
             'personal_access_token' => 'Token',
+            'departments' => 'Department',
         ];
         return $data[$table];
     }
@@ -36,6 +37,12 @@
         response([
             'status' => false,
             'message' => 'User Unauthenticated',
+        ],$code);
+    }
+    function unauthorized($code = 403){
+        response([
+            'status' => false,
+            'message' => 'User Unauthorized',
         ],$code);
     }
     

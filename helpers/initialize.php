@@ -9,7 +9,7 @@
     
     
     error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
-    header('Content-Type: application/json');
+    header('Content-Type: application/json,application/x-www-form-urlencoded');
 
     require_once('helpers/database.php');
     require_once('helpers/query.php');
@@ -19,6 +19,7 @@
     
     require_once('models/user.php');
     require_once('models/token.php');
+    require_once('models/department.php');
     
 
     
