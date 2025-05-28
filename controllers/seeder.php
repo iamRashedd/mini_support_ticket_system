@@ -1,15 +1,16 @@
 <?php
 
 $query = new Query();
+$data = [];
 
-$user = $query->table('users')
+$data['user'][] = $query->table('users')
         ->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => password_hash('123456',PASSWORD_DEFAULT),
             'role' => 'admin',
         ]);
-$user = $query->table('users')
+$data['user'][] = $query->table('users')
         ->create([
             'name' => 'Agent',
             'email' => 'agent@gmail.com',
@@ -17,4 +18,18 @@ $user = $query->table('users')
             'role' => 'agent',
         ]);
 
-response($user);
+$data['depart'][] = $query->table('departments')
+            ->create([
+                'name' => 'IT',
+            ]);
+            
+$data['depart'][] = $query->table('departments')
+            ->create([
+                'name' => 'Server',
+            ]);
+
+response([
+    'status' => true,
+    'message' => 'Seeding DB',
+    'data' => $data
+]);

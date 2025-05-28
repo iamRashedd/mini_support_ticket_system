@@ -29,4 +29,7 @@ class User{
     public function isAdmin(){
         return $this->role == 'admin';
     }
+    public function isAgent(){
+        return $this->role == 'agent';
+    }
 }

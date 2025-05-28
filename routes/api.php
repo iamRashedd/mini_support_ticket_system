@@ -13,6 +13,14 @@ return [
         '/seed' => [
             'action' => 'controllers/seeder.php',
         ],
+        '/department' => [
+            'action' => 'controllers/api/department/list.php',
+            'middleware' => 'auth'
+        ],
+        '/ticket' => [
+            'action' => 'controllers/api/ticket/list.php',
+            'middleware' => 'auth'
+        ],
     ],
     'POST' => [
         '/auth/login' => [
@@ -23,6 +31,22 @@ return [
         ],
         '/department' => [
             'action' => 'controllers/api/department/create.php',
+            'middleware' => 'auth'
+        ],
+        '/ticket' => [
+            'action' => 'controllers/api/ticket/create.php',
+            'middleware' => 'auth'
+        ],
+        '/ticket-status' => [
+            'action' => 'controllers/api/ticket/status.php',
+            'middleware' => 'auth'
+        ],
+        '/ticket-assign' => [
+            'action' => 'controllers/api/ticket/assign.php',
+            'middleware' => 'auth'
+        ],
+        '/ticket-note' => [
+            'action' => 'controllers/api/ticket-note/create.php',
             'middleware' => 'auth'
         ],
     ],

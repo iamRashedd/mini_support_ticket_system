@@ -20,6 +20,9 @@
             'users' => 'User',
             'personal_access_token' => 'Token',
             'departments' => 'Department',
+            'tickets' => 'Ticket',
+            'ticket_notes' => 'TicketNote',
+            'ticket_attachments' => 'TicketAttachment',
         ];
         return $data[$table];
     }
@@ -39,10 +42,11 @@
             'message' => 'User Unauthenticated',
         ],$code);
     }
-    function unauthorized($code = 403){
+    function unauthorized($msg = null){
+        $message = $msg ? 'User Unauthorized! ('.$msg.')' : 'User Unauthorized!';
         response([
             'status' => false,
-            'message' => 'User Unauthorized',
-        ],$code);
+            'message' => $message,
+        ],403);
     }
     

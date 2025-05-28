@@ -99,6 +99,7 @@ class Validator{
         }
         if (strlen($v1) <= '8') {
             static::$validation_error['password'] = "Your Password Must Contain At Least 8 Digits !";
+            return true;
         }
         // elseif(!preg_match("#[0-9]+#",$_POST["password"])) {
         //     static::$validation_error['password'] = "Your Password Must Contain At Least 1 Number !"."<br>";
@@ -124,6 +125,68 @@ class Validator{
         self::pass('role');
         return false;
     }
+    public static function title($value){
+        if(!$value){
+            static::$validation_error['title'] = 'Title Required';
+            return true;
+        }
+        if (strlen($value) < 5 ) {
+            static::$validation_error['title'] = "Title Must Contain At Least 5 char !";
+            return true;
+        }
+        self::pass('title');
+        return false;
+    }
+    public static function description($value){
+        if(!$value){
+            static::$validation_error['description'] = 'Description Required';
+            return true;
+        }
+        if (strlen($value) <= 10 ) {
+            static::$validation_error['description'] = "Description Must Contain At Least 10 char !";
+            return true;
+        }
+        self::pass('description');
+        return false;
+    }
+    public static function note($value){
+        if(!$value){
+            static::$validation_error['note'] = 'Note Required';
+            return true;
+        }
+        if (strlen($value) <= 20 ) {
+            static::$validation_error['note'] = "Note Must Contain At Least 20 char !";
+            return true;
+        }
+        self::pass('description');
+        return false;
+    }
+    public static function department($v){
+        if(!$v){
+            static::$validation_error['department_id'] = 'Department Required';
+            return true;
+        }
+        if(!is_numeric($v)){
+            static::$validation_error['department_id'] = 'Invalid Department ID';
+            return true;
+        }
+        $query = new Query();
+        $dep = $query->table('departments')->where('id','=',$v)->first();
+        if(!$dep){
+            static::$validation_error['department_id'] = 'Department not found';
+            return true;
+        }
+        self::pass('department_id');
+        return false;
+    }
+    public static function ticket_status($value = null){
+        if($value && !in_array($value,['open','in_progress','closed'])){
+            static::$validation_error['status'] = 'Invalid Status';
+            return true;
+        }
+        self::pass('status');
+        return false;
+    }
     public static function register($data){
         self::clear();
         self::name($data['name']);
@@ -135,5 +198,12 @@ class Validator{
         self::clear();
         self::email($data['email']);
         self::password($data['password']);
+    }
+    public static function new_ticket($data){
+        self::clear();
+        self::title($data['title']);
+        self::description($data['description']);
+        self::department($data['department_id']);
+        self::ticket_status($data['status']);
     }
 }

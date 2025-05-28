@@ -20,6 +20,9 @@
     require_once('models/user.php');
     require_once('models/token.php');
     require_once('models/department.php');
+    require_once('models/ticket.php');
+    require_once('models/TicketNote.php');
+    require_once('models/TicketAttachment.php');
     
 
     
